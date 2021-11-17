@@ -1,9 +1,9 @@
 const fs = require("fs");
 const stream = require("stream");
 
-const inputStream = fs.createReadStream("./input.txt");
+const inputStream = fs.createReadStream("input.txt");
 const outputStream = process.stdout;
-const writeStream = fs.createWriteStream("./output.txt");
+const writeStream = fs.createWriteStream("output.txt");
 
 const transformStream = new stream.Transform({
     transform(chunk, enc, nextStreamCallBack){
