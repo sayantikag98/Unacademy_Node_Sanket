@@ -1,0 +1,13 @@
+{
+  "name": "l3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "closure_example.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node cowin_api_hw.mjs --state=\"Manipur\" --vaccineType=\"COVISHIELD\" --priceType=\"Free\" --date=\"21-11-2021\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

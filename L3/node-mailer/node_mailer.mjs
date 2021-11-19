@@ -3,12 +3,11 @@
 // Change in gmail account settings to send an email from your gmail account using nodemailer
 // Now open the link https://myaccount.google.com/lesssecureapps to Allow less secure apps: ON. 
 
+import dotenv from "dotenv";
+import nodemailer from "nodemailer"; // loading nodemailer package
 
 const mailSendFunc = (receiverMail, subject, text, html, attachments) => {
-    require('dotenv').config(); // loading the config file
-    const nodemailer = require("nodemailer"); // loading nodemailer package
-    
-    
+    dotenv.config({path: "./node-mailer/.env"}); // loading the config file
     // SMTP or simple mail transfer protocol is used to send emails over the internet
     // this transport object also uses smtp 
     
@@ -55,5 +54,5 @@ const mailSendFunc = (receiverMail, subject, text, html, attachments) => {
     });
 };
 
-module.exports = mailSendFunc;
+export default mailSendFunc;
 
