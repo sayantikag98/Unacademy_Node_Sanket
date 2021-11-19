@@ -4,15 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index"
+    "start": "npm run build && node build/index.js",
+    "watch": "nodemon --watch ./src --exec npm start",
+    "dev": "nodemon --exec ./node_modules/.bin/babel-node ./index.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-index": "babel index.js -d build",
+    "build-src": "babel ./src -d build/src",
+    "build": "npm run clean && npm run build-index && npm run build-src"
   },
-  "type": "module",
   "author": "Sayantika Ghosh",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@babel/node": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/runtime": "^7.16.3"
   }
 }

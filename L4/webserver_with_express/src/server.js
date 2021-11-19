@@ -1,15 +1,15 @@
 import express from "express";
 import morgan from "morgan";
-import parser from "body-parser";
+import { json, urlencoded } from "body-parser";
 
 const app = express();
 const PORT = 3000;
-const { json, urlencoded } = parser; 
 
 
 app.use(morgan("dev"));
 // app.use(express.json());
 app.use(json());
+app.use(urlencoded({extended:true}));
 
 app.get("/", (req, res) => {
     // res.send("Hello World Sayantika");
@@ -21,11 +21,11 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
     console.log(req.body);
     res.json({
-        msg: "Post Request"
+        msg: "Post request send..."
     });
 });
 
-export default () => {
+export const startFunc = () => {
     app.listen(PORT, () => {
         console.log(`Server started at localhost:${PORT}`);
     });
