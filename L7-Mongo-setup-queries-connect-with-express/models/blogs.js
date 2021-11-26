@@ -15,7 +15,7 @@ const blogSchema = Mongoose.Schema({
         // the below type and ref is used to reference another schema (user schema) from this particular blog schema
         // Ref: https://stackoverflow.com/questions/29078753/how-to-reference-another-schema-in-my-mongoose-schema/29079951
         type: Mongoose.Schema.Types.ObjectId, // referencing to the object id of user schema // like foreign key in sql
-        ref: "user",
+        ref: "user", // use collection name to refer to in the database
         required: true
     }
 }, {timestamps: true});
