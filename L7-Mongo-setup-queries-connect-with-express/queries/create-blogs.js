@@ -4,12 +4,13 @@ const connect = require("../mongo-connect/mongo-connect");
 
 connect();
 
-const getAllBlogs = async () => {
+const createBlogs = async () => {
     try{
         await Blog.deleteMany({});
         const user = await User.findById("619f98cbc022a7ae322cfa93").exec();
         await new Blog({title: "Learning", description: "It is fun to learn new things", author: user.id}).save(); // if using new Blog to create blog document .save() is important
         // without defining author will get reference error
+        await Blog.create({title: "Cooking", description: "cooking and feeding to guest are the most important things", author: user.id});
 
 
         // populate() which lets you reference documents in other collections.
@@ -24,6 +25,6 @@ const getAllBlogs = async () => {
     }
 };
 
-getAllBlogs();
+createBlogs();
 
 

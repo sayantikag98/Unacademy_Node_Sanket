@@ -20,4 +20,18 @@ const blogSchema = Mongoose.Schema({
     }
 }, {timestamps: true});
 
+
+// triggers // mongoose middlewares or hooks
+// ref: https://mongoosejs.com/docs/middleware.html
+blogSchema.post("save", (result) => {   // this callback is executed whenever a new blog is created
+    console.log("*************************");
+    console.log(result);
+    console.log("*************************");
+});
+
 module.exports = Mongoose.model("blog", blogSchema);
+
+
+// can use mongoose virtuals for creating views
+// In Mongoose, a virtual is a property that is not stored in MongoDB. Virtuals are typically used for computed properties on documents.
+// ref: https://mongoosejs.com/docs/tutorials/virtuals.html
