@@ -15,14 +15,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const app = (0, _express.default)();
 const PORT = 3000;
-app.use((0, _morgan.default)("dev")); // app.use(express.json());
 
+const router = _express.default.Router();
+
+app.use((0, _morgan.default)("dev"));
 app.use((0, _bodyParser.json)());
 app.use((0, _bodyParser.urlencoded)({
   extended: true
 }));
-app.get("/", (req, res) => {
-  // res.send("Hello World Sayantika");
+app.use("/posts", router); // Custom middleware
+
+const customMiddleWareFunc = (req, res, next) => {
+  console.log("Custom middleware created");
+  console.log("Custom middleware");
+  console.log(req.body, req.params, res.json.msg);
+  next();
+};
+
+app.get("/", customMiddleWareFunc, (req, res) => {
+  console.log("Call back called");
+  console.log(req.body, req.params, res.json.msg); // res.send("Hello World Sayantika");
+
   res.json({
     msg: "Get Request"
   });
@@ -32,6 +45,23 @@ app.post("/", (req, res) => {
   res.json({
     msg: "Post request send..."
   });
+});
+router.route("/").get((req, res) => {
+  res.send("Posts route get");
+}).post((req, res) => {
+  console.log(req.body);
+  res.send("Posts route post");
+});
+router.route("/:id/:num").patch(customMiddleWareFunc, (req, res) => {
+  console.log("Patch request");
+  console.log(req.body, req.params);
+  res.send("Posts route patch");
+}).put((req, res) => {
+  console.log(req.body, req.params);
+  res.send("Posts route put");
+}).delete((req, res) => {
+  console.log(req.body, req.params);
+  res.send("Posts route delete");
 });
 
 const startFunc = () => {
