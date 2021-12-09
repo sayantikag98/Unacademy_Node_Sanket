@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Posts(){
@@ -14,7 +15,7 @@ export default function Posts(){
                 setPosts(data);
             }
             catch(err){
-                console.log(err);
+                console.error(err);
             }
         };
         dataFetch();
@@ -24,12 +25,14 @@ export default function Posts(){
 // reponse.data is an object and response.data.data is an object
 
     return (
-        <ul>
-            {posts.map(post =>
-            <ul key = {post._id}>
-                <li>{post.title}</li>
-                <li>{post.content}</li>
-                <hr></hr>
+        <ul id = "posts">
+            {posts.length === 0 && <div style = {{marginTop:"10px"}}>No posts to display</div>}
+            {posts.length > 0 && posts.map(post =>
+            <ul key = {post._id} className = "post">
+                <Link to = {`/${post._id}`} className = "post-link">
+                    <li><h2>{post.title}</h2></li>
+                    <li>{post.content}</li>
+                </Link>  
             </ul> 
             )}
         </ul>
