@@ -6,6 +6,7 @@ import { json, urlencoded } from "body-parser";
 import postRouter from "./posts/post-router";
 import userRouter from "./users/user-router";
 import connect from "./utils/database";
+import cors from "cors";
 
 const app = express();
 const PORT = 3000;
@@ -14,6 +15,7 @@ const PORT = 3000;
 app.use(morgan("dev")); // put this before registering any routes
 app.use(json());
 app.use(urlencoded({extended: true}));
+app.use(cors()); // enables all CORS requests
 app.use("/posts", postRouter);
 app.use("/users", userRouter);
 
