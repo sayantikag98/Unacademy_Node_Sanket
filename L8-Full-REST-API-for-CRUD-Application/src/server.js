@@ -15,7 +15,7 @@ const PORT = 3000;
 app.use(morgan("dev")); // put this before registering any routes
 app.use(json());
 app.use(urlencoded({extended: true}));
-app.use(cors()); // enables all CORS requests
+app.use(cors()); // enables all CORS requests reqd when api request is being sent by the frountend for secuirity purpose
 app.use("/posts", postRouter);
 app.use("/users", userRouter);
 
